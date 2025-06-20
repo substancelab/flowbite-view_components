@@ -1,0 +1,14 @@
+<div class="flex">
+  <div class="flex items-center h-5">
+      <%= input %>
+  </div>
+
+  <div class="ms-2 text-sm">
+    <%= label %>
+    <%= hint %>
+  </div>
+
+  <% errors.each do |error| %>
+    <%= render(Flowbite::Input::ValidationError.new(:message => error.upcase_first)) %>
+  <% end %>
+</div>

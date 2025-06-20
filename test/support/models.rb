@@ -42,7 +42,7 @@ end
 class User
   include ActiveModel::Model
 
-  attr_accessor :name, :email, :phone, :password
+  attr_accessor :name, :email, :phone, :password, :subscribed
 
   validates :email, presence: true
   validates :name, presence: true
