@@ -73,7 +73,12 @@ module Flowbite
     def hint
       return unless hint?
 
-      render(Flowbite::Input::Hint.new(@form, @attribute, hint: @hint, id: id_for_hint_element))
+      render(Flowbite::Input::Hint.new(
+        @form,
+        @attribute,
+        hint: @hint,
+        hint_attributes: {id: id_for_hint_element}
+      ))
     end
 
     # Returns the HTML to use for the actual input field element.
