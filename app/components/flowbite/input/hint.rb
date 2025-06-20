@@ -27,16 +27,16 @@ module Flowbite
           @hint,
           **{
             class: classes,
-          }.merge(@attributes)
+          }.merge(@hint_attributes)
         )
       end
 
-      def initialize(form, attribute, hint:, **attributes)
+      def initialize(form, attribute, hint:, hint_attributes: {})
         super
         @attribute = attribute
-        @attributes = attributes
         @form = form
         @hint = hint
+        @hint_attributes = hint_attributes
         @object = form.object
       end
 
