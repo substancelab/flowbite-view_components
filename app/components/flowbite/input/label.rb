@@ -2,6 +2,7 @@
 
 module Flowbite
   module Input
+    # https://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html#method-i-label
     class Label < ViewComponent::Base
       STATES = [
         DEFAULT = :default,
@@ -27,7 +28,7 @@ module Flowbite
       def call
         @form.label(
           @attribute,
-          class: classes
+          **options
         )
       end
 
@@ -35,11 +36,12 @@ module Flowbite
         @object.errors.include?(@attribute.intern)
       end
 
-      def initialize(form, attribute)
+      def initialize(form, attribute, label_attributes: {})
         super
         @attribute = attribute
         @form = form
         @object = form.object
+        @label_attributes = label_attributes
       end
 
       # Returns an array with the CSS classes to apply to the label element
@@ -60,6 +62,14 @@ module Flowbite
         else
           DEFAULT
         end
+      end
+
+      private
+
+      def options
+        {
+          class: classes
+        }.merge(@label_attributes)
       end
     end
   end
