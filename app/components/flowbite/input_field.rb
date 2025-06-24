@@ -30,6 +30,9 @@ module Flowbite
   # additional context or instructions for the user. This is optional. See
   # https://flowbite.com/docs/forms/input-field/#helper-text
   #
+  # @param disabled [Boolean] Whether the input field should be disabled.
+  # Defaults to `false`.
+  #
   # @param input_attributes [Hash] Additional HTML attributes to pass to the
   # input element.
   #
@@ -55,14 +58,15 @@ module Flowbite
       @object.errors[@attribute] || []
     end
 
-    def initialize(attribute:, form:, hint: nil, input_attributes: {}, size: :default)
+    def initialize(attribute:, form:, disabled: false, hint: nil, input_attributes: {}, size: :default)
       super
       @attribute = attribute
+      @disabled = disabled
       @form = form
       @hint = hint
+      @input_attributes = input_attributes
       @object = form.object
       @size = size
-      @input_attributes = input_attributes
     end
 
     def input_component
@@ -86,6 +90,7 @@ module Flowbite
       render(input_component.new(
         @form,
         @attribute,
+        disabled: @disabled,
         input_attributes: default_input_attributes.merge(@input_attributes),
         size: @size
       ))

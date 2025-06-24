@@ -57,4 +57,16 @@ class Flowbite::InputFieldTest < Minitest::Test
 
     assert_selector("select[data-key='state-select']")
   end
+
+  def test_renders_disabled_input_field
+    render_inline(Flowbite::InputField.new(form: @form, attribute: :title, disabled: true))
+
+    assert_selector("input[disabled]")
+  end
+
+  def test_renders_enabled_input_field_by_default
+    render_inline(Flowbite::InputField.new(form: @form, attribute: :title))
+
+    assert_no_selector("input[disabled]")
+  end
 end

@@ -55,4 +55,16 @@ class Flowbite::InputField::CheckboxTest < Minitest::Test
 
     assert_selector("input[type='checkbox'][data-controller='checkbox']")
   end
+
+  def test_renders_disabled_checkbox
+    render_inline(Flowbite::InputField::Checkbox.new(form: @form, attribute: :subscribed, disabled: true))
+
+    assert_selector("input[type='checkbox'][disabled]")
+  end
+
+  def test_renders_enabled_checkbox_by_default
+    render_inline(Flowbite::InputField::Checkbox.new(form: @form, attribute: :subscribed))
+
+    assert_no_selector("input[disabled]")
+  end
 end

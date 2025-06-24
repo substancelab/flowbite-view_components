@@ -72,16 +72,31 @@ class InputFieldPreview < Lookbook::Preview
 
   # @!endgroup
 
-  def disabled_state
-    render(
-      Flowbite::InputField::Text.new(
-        attribute: :first_name,
-        form: form,
-        disabled: true,
-        input_attributes: { placeholder: "Disabled input" }
-      )
-    )
+  # @!group Disabled state
+  #
+  # @display classes w-full
+
+  def disabled_default
+    render(Flowbite::InputField::Text.new(attribute: :first_name, form: form, disabled: true))
   end
+
+  def disabled_email
+    render(Flowbite::InputField::Email.new(attribute: :email, form: form, disabled: true))
+  end
+
+  def disabled_password
+    render(Flowbite::InputField::Password.new(attribute: :password, form: form, disabled: true))
+  end
+
+  def disabled_number
+    render(Flowbite::InputField::Number.new(attribute: :unique_visitors, form: form, disabled: true))
+  end
+
+  def disabled_tel
+    render(Flowbite::InputField::Phone.new(attribute: :phone_number, form: form, disabled: true))
+  end
+
+  # @!endgroup
 
   private
 

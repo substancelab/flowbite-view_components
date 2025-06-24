@@ -60,4 +60,16 @@ class Flowbite::InputField::PasswordTest < Minitest::Test
 
     refute_selector("input[value='secret123']")
   end
+
+  def test_renders_disabled_password
+    render_inline(Flowbite::InputField::Password.new(form: @form, attribute: :password, disabled: true))
+
+    assert_selector("input[type='password'][disabled]")
+  end
+
+  def test_renders_enabled_password_by_default
+    render_inline(Flowbite::InputField::Password.new(form: @form, attribute: :password))
+
+    assert_no_selector("input[disabled]")
+  end
 end
