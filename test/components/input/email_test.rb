@@ -30,6 +30,12 @@ class Flowbite::Input::EmailTest < Minitest::Test
     assert_selector("input[name='user[email]'].border-red-500")
   end
 
+  def test_renders_in_disabled_state
+    render_inline(Flowbite::Input::Email.new(@form, :email, disabled: true))
+
+    assert_selector("input[name='user[email]'][disabled].bg-gray-100.border.border-gray-300.text-gray-900.cursor-not-allowed")
+  end
+
   def test_renders_with_sm_size
     render_inline(Flowbite::Input::Email.new(@form, :email, size: :sm))
 

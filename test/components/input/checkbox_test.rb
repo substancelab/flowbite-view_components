@@ -37,6 +37,12 @@ class Flowbite::Input::CheckboxTest < Minitest::Test
     assert_selector("input[name='user[subscribed]'].border-gray-300")
   end
 
+  def test_renders_in_disabled_state
+    render_inline(Flowbite::Input::Checkbox.new(@form, :subscribed, disabled: true))
+
+    assert_selector("input[name='user[subscribed]'][disabled].bg-gray-100.text-gray-900.cursor-not-allowed")
+  end
+
   def test_adds_attributes_to_input
     render_inline(Flowbite::Input::Checkbox.new(@form, :subscribed, input_attributes: {"data-controller": "checkbox"}))
 

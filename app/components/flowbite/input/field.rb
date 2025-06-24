@@ -16,6 +16,7 @@ module Flowbite
 
       STATES = [
         DEFAULT = :default,
+        DISABLED = :disabled,
         ERROR = :error
       ].freeze
 
@@ -44,6 +45,7 @@ module Flowbite
           {
             default: Flowbite::Style.new(
               default: ["bg-gray-50", "border", "border-gray-300", "text-gray-900", "rounded-lg", "focus:ring-blue-500", "focus:border-blue-500", "block", "w-full", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"],
+              disabled: ["bg-gray-100", "border", "border-gray-300", "text-gray-900", "text-sm", "rounded-lg", "focus:ring-blue-500", "focus:border-blue-500", "block", "w-full", "p-2.5", "cursor-not-allowed", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-gray-400", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"],
               error: ["bg-red-50", "border", "border-red-500", "text-red-900", "placeholder-red-700", "rounded-lg", "focus:ring-red-500", "dark:bg-gray-700", "focus:border-red-500", "block", "w-full", "dark:text-red-500", "dark:placeholder-red-500", "dark:border-red-500"]
             )
           }.freeze
@@ -51,9 +53,10 @@ module Flowbite
         # rubocop:enable Layout/LineLength
       end
 
-      def initialize(form, attribute, input_attributes: {}, size: :default)
+      def initialize(form, attribute, disabled: false, input_attributes: {}, size: :default)
         super
         @attribute = attribute
+        @disabled = disabled
         @form = form
         @input_attributes = input_attributes
         @object = form.object
@@ -81,6 +84,11 @@ module Flowbite
 
       protected
 
+      # Returns true if the field is disabled
+      def disabled?
+        !!@disabled
+      end
+
       def errors?
         @object.errors.include?(@attribute.intern)
       end
@@ -88,18 +96,18 @@ module Flowbite
       # Returns the options argument for the input field
       def options
         {
-          class: classes
+          class: classes,
+          disabled: disabled?
         }.merge(input_attributes)
       end
 
       private
 
       def state
-        if errors?
-          ERROR
-        else
-          DEFAULT
-        end
+        return DISABLED if disabled?
+        return ERROR if errors?
+
+        DEFAULT
       end
     end
   end

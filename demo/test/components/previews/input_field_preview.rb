@@ -72,6 +72,17 @@ class InputFieldPreview < Lookbook::Preview
 
   # @!endgroup
 
+  def disabled_state
+    render(
+      Flowbite::InputField::Text.new(
+        attribute: :first_name,
+        form: form,
+        disabled: true,
+        input_attributes: { placeholder: "Disabled input" }
+      )
+    )
+  end
+
   private
 
   def form
