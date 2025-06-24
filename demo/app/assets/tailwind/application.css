@@ -1,4 +1,8 @@
 @import "tailwindcss";
 
+/* Load Flowbite */
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+
 /* Include CSS classes used by the components in the final CSS */
 @source "../../../../app/components/flowbite";
