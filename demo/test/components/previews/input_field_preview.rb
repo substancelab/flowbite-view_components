@@ -11,7 +11,7 @@ class InputFieldPreview < Lookbook::Preview
   #
   # @display classes w-full
 
-  def default
+  def text
     render(Flowbite::InputField::Text.new(attribute: :first_name, form: form))
   end
 
@@ -76,7 +76,7 @@ class InputFieldPreview < Lookbook::Preview
   #
   # @display classes w-full
 
-  def disabled_default
+  def disabled_text
     render(Flowbite::InputField::Text.new(attribute: :first_name, form: form, disabled: true))
   end
 
